@@ -1,0 +1,2 @@
+# MineOS-Simulator-of-scheduling-and-memory-in-Minecraft
+A Minecraft (Java) server functions like a mini operating system: a 50 ms clock (the "tick"), thousands of "processes" (players, mobs, redstone), a "RAM" consisting of chunks, and a disk. MineOS applies concepts from the course—scheduling, virtual memory, and I/O—to help us understand why a server lags and which design decisions can resolve it.
