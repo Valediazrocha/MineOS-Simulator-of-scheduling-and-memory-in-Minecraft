@@ -47,10 +47,6 @@ The project consists of two interconnected components:
        PERFORMANCE MEASUREMENT
 ```
 
-The CSV file connects the real server with the simulator, allowing recorded workloads to be reproduced and analyzed.
-
----
-
 # 1\. System Model
 
 ## 1.1. Tick Loop
@@ -59,7 +55,6 @@ The simulation follows Minecraft's 20 TPS model, where each tick has a target du
 
 Tick $k$ begins at:
 
-text
 
 ```text
 max(end of previous tick, k * 50 ms)
@@ -149,77 +144,6 @@ The simulator measures:
 
 **Requirements:** JDK 21.
 
-## 2.1. Without Maven
-
-Compile the simulator:
-
-bash
-
-```bash
-javac -d out/main $(find sim-core/src/main -name '*.java')
-```
-
-### Run Experiments
-
-**Full experiment matrix:**
-
-bash
-
-```bash
-java -cp out/main edu.urosario.mineos.cli.Experiments
-```
-
-Results are exported to:
-
-text
-
-```text
-results/results.csv
-```
-
-**Run a single scenario:**
-
-bash
-
-```bash
-java -cp out/main edu.urosario.mineos.cli.Experiments --scenario heavy
-```
-
-**Run a memory frame sweep (thrashing analysis):**
-
-bash
-
-```bash
-java -cp out/main edu.urosario.mineos.cli.Experiments --scenario medium --sweep-frames
-```
-
-**Replay a real server trace:**
-
-bash
-
-```bash
-java -cp out/main edu.urosario.mineos.cli.Experiments --trace mi-traza.csv --frames 2000
-```
-
-## 2.2. With Maven
-
-Run the test suite:
-
-bash
-
-```bash
-mvn test
-```
-
-Build the project:
-
-bash
-
-```bash
-mvn package
-```
-
-Tests use **JUnit 4.13.2**.
 
 ## 2.3. Available Scenarios
 
@@ -231,8 +155,6 @@ Tests use **JUnit 4.13.2**.
 | `explorers` | Players using elytra, stressing memory management |
 
 **Reproducibility:** The same random seed always produces the same workload trace.
-
----
 
 # 3\. Experimental Findings
 
@@ -315,9 +237,7 @@ The memory replacement algorithms produce significantly different page fault rat
 
 **General performance:**
 
-text
-
-```text
+```
 LRU ≈ CLOCK << FIFO
 ```
 
@@ -504,24 +424,18 @@ The plugin connects the simulator with a real Minecraft server, allowing workloa
 
 Build the plugin:
 
-bash
-
-```bash
+```
 mvn -Pplugin package
 ```
 
 After compilation, copy the generated `.jar` file from:
 
-text
 
 ```text
 paper-plugin/target/
 ```
 
 Into your server's:
-
-text
-
 ```text
 plugins/
 ```
@@ -555,8 +469,6 @@ To compare the default behavior against the tiered policy, use the same server a
 
 **Step 1 — Disable the policy**
 
-text
-
 ```text
 /mineos policy off
 ```
@@ -567,7 +479,6 @@ Allow the server to stabilize and collect measurements.
 
 **Step 3 — Check server performance**
 
-text
 
 ```text
 /mineos status
@@ -576,8 +487,6 @@ text
 Record the reported MSPT values.
 
 **Step 4 — Enable the tiered policy**
-
-text
 
 ```text
 /mineos policy tiered
@@ -588,8 +497,6 @@ text
 Allow the new configuration to stabilize.
 
 **Step 6 — Measure again**
-
-text
 
 ```text
 /mineos status
@@ -625,8 +532,6 @@ The plugin does not record:
 
 The tiered policy relies on:
 
-java
-
 ```java
 Mob#setAware
 ```
@@ -653,12 +558,3 @@ Ultimately, Minecraft server performance is not just a matter of CPU speed or av
 
 **MineOS provides an experimental environment for studying these interactions and evaluating potential solutions.**
 
-A few improvements worth noting:
-
-- The README now has a clear progression: project → architecture → methodology → experiments → limitations → plugin → conclusion.
-- All terminal commands are separated into copyable code blocks.
-- Experimental results are presented in tables for easier comparison.
-- Technical details are grouped into subsections instead of long paragraphs.
-- The original measurements and technical claims have been preserved.
-
-One note: I converted the HTML-style collapsible test details into a GitHub-compatible `<details>` section. Everything else uses standard Markdown.
