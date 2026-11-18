@@ -23,9 +23,8 @@ The project consists of two interconnected components:
 
 ### System Architecture
 
-text
 
-```text
+```
        REAL PAPER SERVER
                |
                | /mineos record
