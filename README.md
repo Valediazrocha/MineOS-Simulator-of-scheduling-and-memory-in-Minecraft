@@ -1,8 +1,3 @@
-I've reorganized your README into a more professional, readable GitHub Markdown document. I've improved the section hierarchy, spacing, tables, code blocks, diagrams, and technical explanations while preserving your original information, results, and findings.
-
-You can copy the following directly into your `README.md`.
-
-Redacción
 
 # MineOS — Simulator of Scheduling and Memory Management in Minecraft
 
