@@ -1,5 +1,5 @@
 
-# MineOS — Simulator of Scheduling and Memory Management in Minecraft
+# MineOS Simulator of Scheduling and Memory Management in Minecraft
 
 **A simulation of operating system concepts applied to Minecraft server performance.**
 
