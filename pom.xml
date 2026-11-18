@@ -4,28 +4,38 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>edu.urosario.mineos</groupId>
-  <artifactId>mineos-parent</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>MineOS - Minecraft OS Scheduler Simulator</name>
+  <parent>
+    <groupId>edu.urosario.mineos</groupId>
+    <artifactId>mineos-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
 
-  <properties>
-    <maven.compiler.release>21</maven.compiler.release>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+  <artifactId>sim-core</artifactId>
+  <name>MineOS sim-core</name>
 
-  <modules>
-    <module>sim-core</module>
-  </modules>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
-  <!-- El plugin de Paper necesita descargar paper-api; se activa con: mvn -Pplugin package -->
-  <profiles>
-    <profile>
-      <id>plugin</id>
-      <modules>
-        <module>paper-plugin</module>
-      </modules>
-    </profile>
-  </profiles>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.1</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>edu.urosario.mineos.cli.Experiments</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
